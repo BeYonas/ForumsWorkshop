@@ -39,7 +39,6 @@ class ATM:
                     print("give " + str(request))
                     request = 0
         print "=================================="
-        return self.balance
 
     def show_withdrawals(self):
         for withdrawal in self.withdrawals_list:
