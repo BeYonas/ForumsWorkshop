@@ -5,6 +5,6 @@ class Member:
 
 
 class Post:
-    def __init__(self, title, contetnt):
+    def __init__(self, title, content):
         self.title = title
-        self.content = contetnt
+        self.content = content
