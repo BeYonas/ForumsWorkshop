@@ -25,7 +25,11 @@ class MemberStore:
 
     def update(self, member):
         # update member data
-        pass
+        all_members = self.get_all()
+        for index in range(len(all_members)):
+            if all_members[index].id == member.id:
+                all_members[index] = member
+                break
 
     def delete(self, id):
         # delete member by id
@@ -69,7 +73,11 @@ class PostStore:
 
     def update(self, post):
         # update post data
-        pass
+        all_posts = self.get_all()
+        for index in range(len(all_posts)):
+            if all_posts[index].id == post.id:
+                all_posts[index] = post
+                break
 
     def delete(self, id):
         # delete post by id
