@@ -16,10 +16,12 @@ class MemberStore:
 
     def get_by_id(self, id):
         # search for member by id
+        result = None
         for member in MemberStore.members:
             if member.id == id:
-                return member
-        return None
+                result = member
+                break
+        return result
 
     def update(self, member):
         # update member data
@@ -53,10 +55,12 @@ class PostStore:
 
     def get_by_id(self, id):
         # search for post by id
+        result = None
         for post in PostStore.posts:
             if post.id == id:
-                return post
-        return None
+                result = post
+                break
+        return result
 
     def update(self, post):
         # update post data
