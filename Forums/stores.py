@@ -29,7 +29,7 @@ class MemberStore:
 
     def delete(self, id):
         # delete member by id
-        member_to_delete = MemberStore.get_by_id(id)
+        member_to_delete = self.get_by_id(id)
         MemberStore.members.remove(member_to_delete)
 
     def entity_exists(self, member):
