@@ -73,7 +73,7 @@ class PostStore:
 
     def delete(self, id):
         # delete post by id
-        post_to_delete = PostStore.get_by_id(id)
+        post_to_delete = self.get_by_id(id)
         PostStore.posts.remove(post_to_delete)
 
     def entity_exists(self, post):
