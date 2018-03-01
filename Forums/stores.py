@@ -34,7 +34,12 @@ class MemberStore:
 
     def entity_exists(self, member):
         # checks if an entity exists in a store
-        return member in MemberStore.members
+        result = True
+
+        if self.get_by_id(member.id) is None:
+            result = False
+
+        return result
 
 
 class PostStore:
@@ -73,4 +78,9 @@ class PostStore:
 
     def entity_exists(self, post):
         # checks if an entity exists in a store
-        return post in PostStore.posts
+        result = True
+
+        if self.get_by_id(post.id) is None:
+            result = False
+
+        return result
