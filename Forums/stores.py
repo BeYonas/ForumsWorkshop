@@ -45,7 +45,13 @@ class MemberStore:
 
         return result
 
-
+    def get_by_name(self,name):
+        all_members= self.get_all()
+        result=[]
+        for member in all_members:
+            if member.name == name:
+                result.append(member)
+        return result
 class PostStore:
     Last_id = 1
     posts = []
