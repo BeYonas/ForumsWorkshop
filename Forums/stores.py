@@ -48,6 +48,18 @@ class MemberStore:
     def get_by_name(self, name):
         return (member for member in self.get_all() if member.name == name)
 
+    def get_members_with_posts(self, posts_list):
+        for member in self.members:
+            post_index = 0
+            while post_index < len(posts_list):
+                post = posts_list[post_index]
+                if post.member_id == member.id:
+                    member.posts.append(post)
+                    posts_list.remove(post)
+                    continue
+                post_index += 1
+            yield member
+
 class PostStore:
     Last_id = 1
     posts = []
