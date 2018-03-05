@@ -60,6 +60,17 @@ class MemberStore:
                 post_index += 1
             yield member
 
+    def get_top_two(self, posts_list):
+        members_with_posts = sorted(self.get_members_with_posts(posts_list),
+                                    key=lambda member: len(member.posts),
+                                    reverse=True)
+        top_member_index = 0
+        while top_member_index < 2:
+            top_member = members_with_posts[top_member_index]
+            yield top_member
+            top_member_index += 1
+
+
 class PostStore:
     Last_id = 1
     posts = []
