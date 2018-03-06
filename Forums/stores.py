@@ -1,3 +1,6 @@
+import itertools
+
+
 class MemberStore:
     Last_id = 1
     members = []
@@ -23,12 +26,12 @@ class MemberStore:
                 break
         return result
 
-    def update(self, member):
+    def update(self, updated_member):
         # update member data
         all_members = self.get_all()
-        for index in range(len(all_members)):
-            if all_members[index].id == member.id:
-                all_members[index] = member
+        for index, member in enumerate(all_members):
+            if updated_member.id == member.id:
+                all_members[index] = updated_member
                 break
 
     def delete(self, id):
@@ -49,26 +52,18 @@ class MemberStore:
         return (member for member in self.get_all() if member.name == name)
 
     def get_members_with_posts(self, posts_list):
-        for member in self.members:
-            post_index = 0
-            while post_index < len(posts_list):
-                post = posts_list[post_index]
-                if post.member_id == member.id:
-                    member.posts.append(post)
-                    posts_list.remove(post)
-                    continue
-                post_index += 1
-            yield member
+        all_members = self.get_all()
+        for member, post in itertools.product(all_members, posts_list):
+            if post.member_id == member.id:
+                member.posts.append(post)
+                posts_list.remove(post)
+        return (member for member in all_members)
 
     def get_top_two(self, posts_list):
-        members_with_posts = sorted(self.get_members_with_posts(posts_list),
-                                    key=lambda member: len(member.posts),
-                                    reverse=True)
-        top_member_index = 0
-        while top_member_index < 2:
-            top_member = members_with_posts[top_member_index]
-            yield top_member
-            top_member_index += 1
+        sorted_members = sorted(self.get_members_with_posts(posts_list),
+                                key=lambda member: len(member.posts),
+                                reverse=True)
+        return (member for member in sorted_members[:2])
 
 
 class PostStore:
@@ -96,12 +91,12 @@ class PostStore:
                 break
         return result
 
-    def update(self, post):
+    def update(self, updated_post):
         # update post data
         all_posts = self.get_all()
-        for index in range(len(all_posts)):
-            if all_posts[index].id == post.id:
-                all_posts[index] = post
+        for index, post in enumerate(all_posts):
+            if updated_post.id == post.id:
+                all_posts[index] = updated_post
                 break
 
     def delete(self, id):
