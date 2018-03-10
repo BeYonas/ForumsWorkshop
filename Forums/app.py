@@ -1,23 +1,13 @@
-import models
+from flask import Flask
+import dummy_data
 import stores
-from flask import Flask, render_template
 
 app = Flask(__name__)
-
+member_store = stores.MemberStore()
 post_store = stores.PostStore()
-post_store.add(models.Post("Life", "Life is alawys great"))
-post_store.add(models.Post("Sunshine", "Sunshine is amazing"))
 
+from views import *
 
-@app.route("/")
-@app.route("/index")
-def home():
-    return render_template("index.html", posts=post_store.get_all())
-
-
-@app.route("/SayHello/<name>")
-def say_hellow(name):
-    return "Hello {name}".format(name=name)
-
-
-app.run()
+if __name__ == "__main__":
+    dummy_data.seed_stores(member_store, post_store)
+    app.run()
