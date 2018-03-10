@@ -1,7 +1,10 @@
+import models
+import stores
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
+post_store = stores.PostStore()
 
 @app.route("/")
 @app.route("/index")
