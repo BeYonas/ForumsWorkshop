@@ -24,21 +24,13 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
+    {%for post in posts%}
 	<tr>
-        <td>topic1</td>
+        <td>{{post.title}}</td>
         <td><a href="something">edit</a></td>
         <td><a href="something">delete</a></td>
     </tr>
-    <tr>
-        <td>topic2</td>
-        <td><a href="something">edit</a></td>
-        <td><a href="something">delete</a></td>
-    </tr>
-	<tr>
-        <td>topic3</td>
-        <td><a href="something">edit</a></td>
-        <td><a href="something">delete</a></td>
-    </tr>  
+    {%endfor%}
 </table>
 </div>
 </body>
